@@ -1,10 +1,14 @@
 import React from "react";
 import NavigationBar from "../NavigationBar";
+import Footer from "../( components )/Footer";
+import Breadcrumb from "../( components )/Breadcrumb";
 
 const ErrorPage = () => {
   return (
+    <>
+    <NavigationBar />
+    <Breadcrumb title="Error" />
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <NavigationBar />
       <div className="w-96 h-auto">
         {/* Replace with your image source */}
         <img
@@ -23,8 +27,9 @@ const ErrorPage = () => {
       >
         Go Back to Home
       </button>
-      <Footer />
     </div>
+    <Footer />
+    </>
   );
 };
 

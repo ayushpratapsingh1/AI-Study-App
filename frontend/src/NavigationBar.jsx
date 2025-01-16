@@ -1,5 +1,4 @@
 import React from 'react';
-import { Search } from 'lucide-react';
 import Logo from './Logo';
 
 const NavigationBar = () => {
@@ -8,6 +7,8 @@ const NavigationBar = () => {
     { title: 'Courses', href: '/courses' },
     { title: 'Quizzes', href: '/quiz' },
     { title: 'Study Assistant', href: '/study-assistant' },
+    { title: 'FAQs', href: '/FAQ' },
+    { title: 'Contact', href: '/Contact' }
   ];
 
   return (
@@ -35,7 +36,8 @@ const NavigationBar = () => {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-4">
-            <button className="bg-orange-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-orange-600">
+            <button className="bg-orange-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-orange-600"
+                    onClick={() => window.location.href = '/upload-notes'}>
               Upload Notes
             </button>
           </div>

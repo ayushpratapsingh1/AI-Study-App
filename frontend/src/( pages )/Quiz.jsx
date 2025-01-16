@@ -2,7 +2,6 @@ import React, { useState, useMemo } from "react";
 import { Grid, Search, Filter, Clock, BookOpen, Award, RefreshCw } from "lucide-react";
 import Sidebar from "../( components )/Quizsidebar.jsx";
 import PostCard from "../( components )/PostCard";
-import SearchBar from "../( components )/Searchbar";
 import NavigationBar from "../NavigationBar.jsx";
 import Footer from "../( components )/Footer.jsx";
 import Breadcrumb from "../( components )/Breadcrumb.jsx";

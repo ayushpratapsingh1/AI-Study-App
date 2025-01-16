@@ -42,3 +42,27 @@
   background-size: 200% 100%;
   animation: shine 3s linear infinite;
 }
+
+/* Add these styles to your existing CSS */
+.react-select .react-select__control {
+  border-color: #e5e7eb;
+  border-radius: 0.5rem;
+  min-height: 2.75rem;
+}
+
+.react-select .react-select__control:hover {
+  border-color: #f97316;
+}
+
+.react-select .react-select__control--is-focused {
+  border-color: #f97316;
+  box-shadow: 0 0 0 1px #f97316;
+}
+
+.react-select .react-select__option--is-selected {
+  background-color: #f97316;
+}
+
+.react-select .react-select__option--is-focused {
+  background-color: #ffedd5;
+}

@@ -7,25 +7,25 @@ const CourseCard = ({ course }) => {
 
   return (
     <div
-      className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+      className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative">
+      <div className="relative overflow-hidden">
         <img
           src={course.image}
           alt={course.title}
-          className="w-full h-48 object-cover transition-transform duration-300"
-          style={{ transform: isHovered ? 'scale(1.05)' : 'scale(1)' }}
+          className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
           onError={(e) => e.target.src = '/images/default-image.jpg'}
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         {course.featured && (
-          <div className="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
+          <div className="absolute top-4 left-4 bg-blue-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
             Featured
           </div>
         )}
         {course.bestseller && (
-          <div className="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm">
+          <div className="absolute top-4 right-4 bg-orange-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
             Bestseller
           </div>
         )}
@@ -33,40 +33,40 @@ const CourseCard = ({ course }) => {
 
       <div className="p-6">
         <div className="flex items-center gap-2 mb-3">
-          <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs">
+          <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
             {course.category}
           </span>
-          <div className="flex items-center text-yellow-500">
-            <Star size={16} fill="currentColor" />
-            <span className="ml-1 text-sm">{course.rating}</span>
+          <div className="flex items-center text-yellow-500 bg-yellow-50 px-2 py-1 rounded-full">
+            <Star size={14} fill="currentColor" />
+            <span className="ml-1 text-sm font-medium">{course.rating}</span>
           </div>
         </div>
 
-        <h3 className="text-lg font-semibold text-gray-800 mb-3 line-clamp-2">
+        <h3 className="text-lg font-semibold text-gray-800 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
           {course.title}
         </h3>
 
         <div className="flex items-center gap-4 text-gray-500 text-sm mb-4">
           <div className="flex items-center gap-1">
-            <Clock size={16} />
+            <Clock size={14} className="text-gray-400" />
             <span>{course.duration}</span>
           </div>
           <div className="flex items-center gap-1">
-            <Users size={16} />
+            <Users size={14} className="text-gray-400" />
             <span>{course.students} Students</span>
           </div>
           <div className="flex items-center gap-1">
-            <BookOpen size={16} />
-            <span>{course.lessons}</span>
+            <BookOpen size={14} className="text-gray-400" />
+            <span>{course.lessons} Lessons</span>
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between pt-4 border-t">
           <div className="flex items-center gap-2">
-            <span className="line-through text-gray-400">{course.price}</span>
+            <span className="text-sm line-through text-gray-400">{course.price}</span>
             <span className="text-xl font-bold text-blue-600">{course.discountPrice}</span>
           </div>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
             Enroll Now
           </button>
         </div>
