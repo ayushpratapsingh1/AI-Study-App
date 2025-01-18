@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const NavigationBar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const navItems = [
     { title: 'Home', href: '/' },
     { title: 'Courses', href: '/courses' },
     { title: 'Quizzes', href: '/quiz' },
     { title: 'Study Assistant', href: '/study-assistant' },
-    { title: 'FAQs', href: '/FAQ' },
-    { title: 'Contact', href: '/Contact' }
+    { title: 'FAQs', href: '/faq' },
+    { title: 'Contact', href: '/contact' }
   ];
 
   return (
@@ -15,36 +20,46 @@ const NavigationBar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo Section */}
-          <div className="flex items-center gap-4">
-          <img src="/FikraSpace_Logo_Transparent.png" alt="FikraSpace Logo" 
-    className='max-w-[10rem]'/>
+          <Link to="/" className="flex items-center gap-4">
+            <img 
+              src="/FikraSpace_Logo_Transparent.png" 
+              alt="FikraSpace Logo" 
+              className="max-w-[10rem]"
+            />
             <span className="text-xl font-bold text-orange-500">EduPlatform</span>
-          </div>
+          </Link>
 
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.href}
-                href={item.href}
-                className="text-gray-700 font-medium hover:text-orange-500 transition-colors"
+                to={item.href}
+                className={`text-gray-700 font-medium hover:text-orange-500 transition-colors ${
+                  location.pathname === item.href ? 'text-orange-500' : ''
+                }`}
               >
                 {item.title}
-              </a>
+              </Link>
             ))}
           </nav>
 
           {/* Action Buttons */}
           <div className="flex items-center gap-4">
-            <button className="bg-orange-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-orange-600"
-                    onClick={() => window.location.href = '/upload-notes'}>
+            <button 
+              className="bg-orange-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-orange-600"
+              onClick={() => navigate('/upload-notes')}
+            >
               Upload Notes
             </button>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <button className="text-gray-700 focus:outline-none hover:text-orange-500">
+          <div className="md:hidden">
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-gray-700 focus:outline-none hover:text-orange-500"
+            >
               <svg
                 className="w-6 h-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -56,12 +71,35 @@ const NavigationBar = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M4 6h16M4 12h16m-7 6h7"
+                  d={isMobileMenuOpen 
+                    ? "M6 18L18 6M6 6l12 12" 
+                    : "M4 6h16M4 12h16m-7 6h7"
+                  }
                 />
               </svg>
             </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden py-4">
+            <nav className="flex flex-col gap-4">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className={`text-gray-700 font-medium hover:text-orange-500 transition-colors ${
+                    location.pathname === item.href ? 'text-orange-500' : ''
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   );

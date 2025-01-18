@@ -1,31 +1,27 @@
-import Courses from "./pages/Courses";
-import Home from "./pages/Home";
-import Quiz from "./pages/Quiz";
-import Login from "./pages/Login";
-import ErrorPage from "./pages/Error";
-import FAQ from "./pages/FAQs";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import ChatInterface from "./pages/AIChat";
-import Contact from "./components/Contact";
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Courses from './pages/Courses';
+import Quiz from './pages/Quiz';
+import StudyAssistant from './pages/AIChat';
+import FAQ from './pages/FAQs';
+import Contact from './pages/Contact';
 import UploadNotes from './pages/UploadNotes';
 
 function App() {
   return (
-    <Router>
-      <div className="content">
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-grow">
         <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/courses" element={<Courses />} />
-          <Route exact path="/quiz" element={<Quiz />} />
-          <Route exact path="/contact" element={<Contact />} /> 
-          <Route exact path="/study-assistant" element={<ChatInterface />} /> 
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/FAQ" element={<FAQ />} />
-          <Route exact path="/upload-notes" element={<UploadNotes />} />
-          <Route path="*" element={<ErrorPage />} /> 
+          <Route path="/" element={<Home />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/study-assistant" element={<StudyAssistant />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/upload-notes" element={<UploadNotes />} />
         </Routes>
-      </div>
-    </Router>
+      </main>
+    </div>
   );
 }
 

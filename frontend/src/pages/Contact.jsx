@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { Mail, Phone, Clock, MapPin, Send } from 'lucide-react';
-import NavigationBar from "../pages/NavigationBar";
-import Breadcrumb from "./Breadcrumb";
-import Footer from "./Footer";
+import NavigationBar from "./NavigationBar";
+import Breadcrumb from "../components/Breadcrumb";
+import Footer from "../components/Footer";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
