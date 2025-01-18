@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Logo from '../components/Logo';
 
 const NavigationBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -20,8 +19,10 @@ const NavigationBar = () => {
     <header className="border-b bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Replace the old logo section with the new Logo component */}
-          <Logo size="default" showText={true} />
+          {/* Logo Section */}
+          <Link to="/" className="flex items-center gap-4">
+            <span className="text-xl font-bold text-orange-500">EduPlatform</span>
+          </Link>
 
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-6">
@@ -100,3 +101,4 @@ const NavigationBar = () => {
 };
 
 export default NavigationBar;
+
