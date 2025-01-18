@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import { Upload, X, File, Check, BookOpen, Clock, Tag, FileText } from 'lucide-react';
 import Select from 'react-select';
 import toast, { Toaster } from 'react-hot-toast';
-import NavigationBar from '../NavigationBar';
+import NavigationBar from './NavigationBar';
 import Breadcrumb from '../components/Breadcrumb';
 import Footer from '../components/Footer';
 

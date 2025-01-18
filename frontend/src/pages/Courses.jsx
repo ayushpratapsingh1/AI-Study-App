@@ -1,6 +1,6 @@
 import Footer from '../components/Footer'
 import FeaturedCourses from '../components/Features';
-import NavigationBar from '../NavigationBar';
+import NavigationBar from './NavigationBar';
 import Breadcrumb from '../components/Breadcrumb';
 
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import Logo from './Logo';
 
 const NavigationBar = () => {
   const navItems = [
@@ -17,7 +16,8 @@ const NavigationBar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo Section */}
           <div className="flex items-center gap-4">
-            <Logo />
+          <img src="/FikraSpace_Logo_Transparent.png" alt="FikraSpace Logo" 
+    className='max-w-[10rem]'/>
             <span className="text-xl font-bold text-orange-500">EduPlatform</span>
           </div>
 

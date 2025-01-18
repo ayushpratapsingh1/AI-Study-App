@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, RotateCw, Bot, User, Copy, Check, Search, Trash2, RefreshCw } from 'lucide-react';
 import axios from 'axios';
-import NavigationBar from '../NavigationBar';
+import NavigationBar from './NavigationBar';
 import Breadcrumb from '../components/Breadcrumb';
 
 const WelcomeScreen = () => (

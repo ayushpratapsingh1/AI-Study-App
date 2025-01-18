@@ -4,7 +4,7 @@ import Feedback from "../components/Feedback"
 import Footer from "../components/Footer"
 import HeroSection from "../components/Hero"
 import Statistics from "../components/Statistics"
-import NavigationBar from "../NavigationBar"
+import NavigationBar from "./NavigationBar"
 
 function Home() {
 

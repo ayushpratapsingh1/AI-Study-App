@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import NavigationBar from '../NavigationBar';
+import NavigationBar from './NavigationBar';
 import Breadcrumb from '../components/Breadcrumb';
 import Footer from '../components/Footer';
 
