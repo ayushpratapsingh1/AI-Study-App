@@ -1,7 +1,7 @@
 import React from "react";
 import NavigationBar from "../NavigationBar";
-import Footer from "../( components )/Footer";
-import Breadcrumb from "../( components )/Breadcrumb";
+import Footer from "../components/Footer";
+import Breadcrumb from "../components/Breadcrumb";
 
 const ErrorPage = () => {
   return (

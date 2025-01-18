@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import NavigationBar from '../NavigationBar';
-import Breadcrumb from '../( components )/Breadcrumb';
-import Footer from '../( components )/Footer';
+import Breadcrumb from '../components/Breadcrumb';
+import Footer from '../components/Footer';
 
 const FAQItem = ({ question, answer, isOpen, onClick }) => {
   return (

@@ -1,7 +1,7 @@
-import Footer from '../( components )/Footer'
-import FeaturedCourses from '../( components )/Features';
+import Footer from '../components/Footer'
+import FeaturedCourses from '../components/Features';
 import NavigationBar from '../NavigationBar';
-import Breadcrumb from '../( components )/Breadcrumb';
+import Breadcrumb from '../components/Breadcrumb';
 
 
 export default function App() {

@@ -4,8 +4,8 @@ import { Upload, X, File, Check, BookOpen, Clock, Tag, FileText } from 'lucide-r
 import Select from 'react-select';
 import toast, { Toaster } from 'react-hot-toast';
 import NavigationBar from '../NavigationBar';
-import Breadcrumb from '../( components )/Breadcrumb';
-import Footer from '../( components )/Footer';
+import Breadcrumb from '../components/Breadcrumb';
+import Footer from '../components/Footer';
 
 const UploadNotes = () => {
   const [formData, setFormData] = useState({

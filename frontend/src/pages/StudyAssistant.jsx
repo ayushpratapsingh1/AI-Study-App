@@ -1,6 +1,6 @@
 import React from "react";
-import SearchBar from "../( components )/StudyAssistantSearchBar";
-import ContentList from "../( components )/ContentList";
+import SearchBar from "../components/StudyAssistantSearchBar";
+import ContentList from "../components/ContentList";
 
 const StudyAssistant = () => {
   return (

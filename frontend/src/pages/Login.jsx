@@ -1,6 +1,6 @@
 import React from "react";
-import LoginForm from "../( components )/Loginform";
-import RegisterForm from "../( components )/Registerform";
+import LoginForm from "../components/Loginform";
+import RegisterForm from "../components/Registerform";
 
 const MainLayout = () => {
   return (
