@@ -1,46 +1,63 @@
-# AI Education Tool
+# AI Study Assistant
 
-An interactive AI-powered education platform that combines real-time chat capabilities with educational content delivery. This tool helps students learn through natural conversation with an AI tutor.
+An intelligent study platform powered by Google's Gemini AI that helps students learn through interactive conversations, personalized quizzes, and adaptive learning paths.
 
 ## 🌟 Features
 
-- **Interactive AI Chat Interface**
-  - Real-time conversation with AI tutor
-  - Message history preservation
-  - Copy/paste functionality
-  - Model output transparency
-  - Chat search capabilities
-  - Conversation management (create, delete, search)
+- **AI-Powered Study Assistant**
+  - Powered by Google's Gemini Pro model
+  - Context-aware responses using your study materials
+  - Natural conversation flow with personality
+  - Instant answers to study-related questions
+  - Explanation of complex topics
 
-- **Educational Content Delivery**
-  - Context-aware responses
-  - Structured learning paths
-  - Real-time feedback
+- **Smart Quiz Generation**
+  - Three difficulty levels (Easy, Medium, Hard)
+  - Auto-generated questions from your notes
+  - Multiple choice format (5 options)
+  - Correct answer validation
   - Progress tracking
+  - Customized to your study material
+
+- **Notes Management**
+  - Upload and organize study materials
+  - Class-based organization
+  - Context preservation for AI interactions
+  - Full-text search capability
+  - Easy content management
+
+- **Interactive Learning**
+  - Real-time AI responses
+  - Personalized learning paths
+  - Progress tracking
+  - Adaptive difficulty
+  - Study material recommendations
 
 ## 🛠️ Tech Stack
 
-- **Frontend:**
-  - React.js
-  - TailwindCSS
-  - Lucide Icons
-  - Axios
+### Frontend
+- React.js with Vite
+- TailwindCSS for styling
+- React Router v6
+- Lucide Icons
+- Axios for API calls
 
-- **Backend:**
-  - Python/Flask
-  - AI/ML Models
-  - SQLite/Database
+### Backend
+- Python/Flask
+- Google Gemini AI
+- PostgreSQL Database
+- SQLAlchemy ORM
+- Flask-CORS
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-
-- Node.js (v14 or higher)
+- Node.js (v16 or higher)
 - Python (v3.8 or higher)
-- npm or yarn
-- pip
+- PostgreSQL
+- Google Cloud Project with Gemini API access
 
-### Installation
+### Environment Setup
 
 1. Clone the repository:
 ```bash
@@ -123,7 +140,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - Built with React and TailwindCSS
-- Powered by [Your AI Model Name]
+- Powered by Google's Gemini AI
 - Icons by Lucide
 
 ## 📞 Contact

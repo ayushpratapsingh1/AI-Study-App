@@ -1,6 +1,12 @@
 from flask import request, jsonify
 from models import db, User, Class, Note, Quiz
-from openai_utils import get_ai_response, generate_easy_quiz_from_notes, generate_medium_quiz_from_notes, generate_hard_quiz_from_notes
+# Change import from openai_utils to gemini_utils
+from gemini_utils import (
+    get_ai_response, 
+    generate_easy_quiz_from_notes,
+    generate_medium_quiz_from_notes, 
+    generate_hard_quiz_from_notes
+)
 
 # Route to create a class
 def create_class():
