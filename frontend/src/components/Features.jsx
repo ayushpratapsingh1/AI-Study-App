@@ -15,7 +15,7 @@ const CourseCard = ({ course }) => {
         <img
           src={course.image}
           alt={course.title}
-          className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-40 sm:h-48 object-cover transition-transform duration-500 group-hover:scale-110"
           onError={(e) => e.target.src = '/images/default-image.jpg'}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -31,22 +31,22 @@ const CourseCard = ({ course }) => {
         )}
       </div>
 
-      <div className="p-6">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
+      <div className="p-4 sm:p-6">
+        <div className="flex flex-wrap items-center gap-2 mb-3">
+          <span className="bg-blue-100 text-blue-600 px-2 sm:px-3 py-1 rounded-full text-xs font-medium">
             {course.category}
           </span>
           <div className="flex items-center text-yellow-500 bg-yellow-50 px-2 py-1 rounded-full">
-            <Star size={14} fill="currentColor" />
-            <span className="ml-1 text-sm font-medium">{course.rating}</span>
+            <Star size={12} fill="currentColor" />
+            <span className="ml-1 text-xs font-medium">{course.rating}</span>
           </div>
         </div>
 
-        <h3 className="text-lg font-semibold text-gray-800 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
           {course.title}
         </h3>
 
-        <div className="flex items-center gap-4 text-gray-500 text-sm mb-4">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-gray-500 text-xs sm:text-sm mb-4">
           <div className="flex items-center gap-1">
             <Clock size={14} className="text-gray-400" />
             <span>{course.duration}</span>
@@ -57,7 +57,7 @@ const CourseCard = ({ course }) => {
           </div>
           <div className="flex items-center gap-1">
             <BookOpen size={14} className="text-gray-400" />
-            <span>{course.lessons} Lessons</span>
+            <span>{course.lessons}</span>
           </div>
         </div>
 
@@ -277,12 +277,12 @@ const FeaturedCourses = () => {
   };
 
   return (
-    <section className="p-10">
+    <section className="p-4 sm:p-10">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-800">Your Courses</h2>
-          <div className="flex items-center gap-4">
-            <div className="w-64 relative">
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-0">Your Courses</h2>
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <div className="w-full sm:w-64 relative">
               <input
                 type="text"
                 placeholder="Search courses..."

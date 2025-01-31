@@ -1,14 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, RotateCw, Bot, User, Copy, Check, Search, Trash2, RefreshCw } from 'lucide-react';
+import { Send, RotateCw, Bot, User, Copy, Check, Search, Trash2, RefreshCw, Menu, X as CloseIcon } from 'lucide-react';
 import axios from 'axios';
 import NavigationBar from './NavigationBar';
 import Breadcrumb from '../components/Breadcrumb';
 
 const WelcomeScreen = () => (
-  <div className="flex flex-col items-center justify-center h-full bg-white">
-    <h1 className="text-4xl font-bold text-gray-800 mb-4">AI-powered Chat System</h1>
-    <p className="text-lg text-gray-600 mb-8">Start a conversation to begin your AI-powered learning journey</p>
-    <Bot className="w-16 h-16 text-orange-500 mb-4" />
+  <div className="flex flex-col items-center justify-center min-h-[50vh] p-4 text-center">
+    <Bot className="w-16 h-16 text-orange-500 mb-6" />
+    <h1 className="text-2xl sm:text-4xl font-bold text-gray-800 mb-4">
+      AI-powered Chat System
+    </h1>
+    <p className="text-base sm:text-lg text-gray-600 max-w-md mx-auto">
+      Start a conversation to begin your AI-powered learning journey
+    </p>
   </div>
 );
 
@@ -22,7 +26,7 @@ const TypingIndicator = () => (
   </div>
 );
 
-const ChatHistory = ({ histories, onSelectChat, onDeleteChat, searchQuery }) => {
+const ChatHistory = ({ histories, onSelectChat, onDeleteChat, searchQuery, onClose }) => {
   const filteredHistories = histories.filter(chat => 
     chat.preview.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -33,7 +37,10 @@ const ChatHistory = ({ histories, onSelectChat, onDeleteChat, searchQuery }) => 
         <div 
           key={chat.id} 
           className="p-2 hover:bg-gray-100 rounded cursor-pointer relative group"
-          onClick={() => onSelectChat(chat.id)}
+          onClick={() => {
+            onSelectChat(chat.id);
+            onClose?.(); // Close sidebar on mobile after selection
+          }}
         >
           <p className="text-sm text-gray-600 truncate pr-8">{chat.preview}</p>
           <span className="text-xs text-gray-400">{new Date(chat.timestamp).toLocaleString()}</span>
@@ -126,6 +133,7 @@ const ChatInterface = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentChatId, setCurrentChatId] = useState(null);
   const [error, setError] = useState(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -133,6 +141,18 @@ const ChatInterface = () => {
     const savedChats = JSON.parse(localStorage.getItem('chats') || '[]');
     setAllChats(savedChats);
   }, []);
+
+  // Prevent body scroll when mobile sidebar is open
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isSidebarOpen]);
 
   const saveChatsToStorage = (chats) => {
     localStorage.setItem('chats', JSON.stringify(chats));
@@ -248,15 +268,40 @@ const ChatInterface = () => {
       <NavigationBar />
       <Breadcrumb />
       <div className="flex flex-1 overflow-hidden">
+        {/* Remove the floating sidebar toggle */}
+        
+        {/* Sidebar Overlay */}
+        {isSidebarOpen && (
+          <div 
+            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
+
         {/* Sidebar */}
-        <div className="w-64 bg-gray-50 border-r border-gray-100 flex flex-col">
-          <div className="p-4 border-b border-gray-200">
+        <div className={`
+          fixed md:static inset-y-0 left-0 z-50
+          w-[280px] md:w-64 bg-gray-50 border-r border-gray-100
+          transform transition-transform duration-300 ease-in-out
+          ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+          md:transform-none flex flex-col
+        `}>
+          <div className="flex items-center justify-between p-4 border-b border-gray-200">
             <button
               onClick={createNewChat}
-              className="w-full mb-4 p-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
+              className="flex-1 p-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
             >
               New Chat
             </button>
+            <button
+              onClick={() => setIsSidebarOpen(false)}
+              className="md:hidden p-2 ml-2 text-gray-500 hover:text-gray-700"
+            >
+              <CloseIcon size={20} />
+            </button>
+          </div>
+
+          <div className="p-4 border-b border-gray-200">
             <div className="relative">
               <input
                 type="text"
@@ -268,12 +313,14 @@ const ChatInterface = () => {
               <Search className="w-4 h-4 text-gray-400 absolute left-2 top-3" />
             </div>
           </div>
+
           <div className="flex-1 overflow-y-auto p-4">
             <ChatHistory 
               histories={allChats}
               onSelectChat={handleSelectChat}
               onDeleteChat={handleDeleteChat}
               searchQuery={searchQuery}
+              onClose={() => setIsSidebarOpen(false)}
             />
           </div>
         </div>
@@ -292,13 +339,14 @@ const ChatInterface = () => {
             {chatHistory.length === 0 ? (
               <WelcomeScreen />
             ) : (
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 {chatHistory.map((chat, index) => (
                   <ChatMessage 
                     key={index} 
                     message={chat.message} 
                     isAi={chat.isAi}
                     timestamp={chat.timestamp}
+                    modelOutput={chat.modelOutput}
                   />
                 ))}
                 {loading && <TypingIndicator />}
@@ -308,21 +356,30 @@ const ChatInterface = () => {
           </div>
 
           {/* Message Input */}
-          <div className="p-4 border-t border-gray-200 bg-white">
-            <form onSubmit={handleSendMessage}>
-              <div className="relative flex items-center">
+          <div className="p-3 sm:p-4 border-t border-gray-200 bg-white">
+            <form onSubmit={handleSendMessage} className="max-w-4xl mx-auto flex items-center gap-2">
+              {/* Sidebar Toggle - Now next to input */}
+              <button
+                type="button"
+                onClick={() => setIsSidebarOpen(true)}
+                className="md:hidden p-3 text-gray-500 hover:text-gray-700"
+              >
+                <Menu size={20} />
+              </button>
+              
+              <div className="relative flex-1">
                 <input
                   type="text"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Type your message..."
-                  className="w-full p-4 pr-16 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full p-3 sm:p-4 pr-12 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   disabled={loading}
                 />
                 <button 
                   type="submit"
                   disabled={loading || message.trim() === ''}
-                  className={`absolute right-2 p-2 rounded-full ${
+                  className={`absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full ${
                     loading || message.trim() === '' 
                       ? 'text-gray-400 bg-gray-100' 
                       : 'text-white bg-orange-500 hover:bg-orange-600'

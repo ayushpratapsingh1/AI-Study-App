@@ -15,12 +15,12 @@ const QuizCategories = ({ activeCategory, onCategoryChange }) => {
   ];
 
   return (
-    <div className="flex gap-4 mb-6">
+    <div className="flex overflow-x-auto -mx-4 px-4 pb-2 mb-6 gap-2 md:gap-4 md:overflow-visible md:px-0 md:mx-0">
       {categories.map(({ id, name, icon: Icon }) => (
         <button
           key={id}
           onClick={() => onCategoryChange(id)}
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
+          className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
             activeCategory === id
               ? 'bg-blue-600 text-white'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -42,13 +42,13 @@ const QuizFilters = ({ onFilterChange, onReset, filters }) => {
   ];
 
   return (
-    <div className="flex items-center gap-4 mb-6">
+    <div className="flex flex-col w-full gap-3 mb-6 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
       {filterOptions.map((filter) => (
         <select
           key={filter.label}
           value={filters[filter.label.toLowerCase()] || ''}
           onChange={(e) => onFilterChange(filter.label.toLowerCase(), e.target.value)}
-          className="px-4 py-2 border rounded-lg text-gray-600 bg-white hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full sm:w-auto px-4 py-2 border rounded-lg text-gray-600 bg-white hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">{filter.label}</option>
           {filter.options.map((option) => (
@@ -60,10 +60,10 @@ const QuizFilters = ({ onFilterChange, onReset, filters }) => {
       ))}
       <button
         onClick={onReset}
-        className="flex items-center gap-2 px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+        className="flex items-center justify-center gap-2 px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
       >
         <RefreshCw size={16} />
-        Reset Filters
+        <span>Reset Filters</span>
       </button>
     </div>
   );
@@ -273,20 +273,20 @@ const Quiz = () => {
     <>
       <NavigationBar />
       <Breadcrumb />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-8">
-        <div className="flex gap-8 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-4 sm:py-8">
+        <div className="flex flex-col md:flex-row gap-8 relative">
           <div className="flex-1">
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-800">Quizzes</h2>
-              <div className="flex items-center gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mb-6 sm:mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Quizzes</h2>
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                 <input
                   type="text"
                   placeholder="Search quizzes..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-64 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full sm:w-64 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                <div className="flex gap-2 border rounded-lg p-1">
+                <div className="hidden sm:flex gap-2 border rounded-lg p-1">
                   <button
                     onClick={() => setView('grid')}
                     className={`p-2 rounded ${view === 'grid' ? 'bg-gray-100' : ''}`}
@@ -314,10 +314,10 @@ const Quiz = () => {
               filters={filters}
             />
 
-            <div className={`grid ${
+            <div className={`flex flex-col gap-4 md:grid ${
               view === 'grid' 
-                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
-                : 'grid-cols-1 gap-4'
+                ? 'md:grid-cols-2 lg:grid-cols-3 md:gap-6'
+                : 'md:grid-cols-1 md:gap-4'
             }`}>
               {filteredPosts.length > 0 ? (
                 filteredPosts.map((post) => (
@@ -335,7 +335,6 @@ const Quiz = () => {
               )}
             </div>
 
-            {/* Add mobile filter button */}
             <button
               className="md:hidden fixed bottom-4 right-4 z-40 bg-blue-600 text-white p-3 rounded-full shadow-lg"
               onClick={() => setIsSidebarOpen(true)}
@@ -345,7 +344,7 @@ const Quiz = () => {
           </div>
 
           <Sidebar
-            className="hidden md:block w-80 flex-shrink-0"
+            className="md:block"
             onCategorySelect={handleCategorySelect}
             onTagSelect={handleTagSelect}
             onReset={handleResetFilters}

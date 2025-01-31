@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.dialects.postgresql import ARRAY
 
 db = SQLAlchemy()
 
@@ -24,4 +25,4 @@ class Quiz(db.Model):
     class_id = db.Column(db.Integer, db.ForeignKey('class.id'))
     question = db.Column(db.Text, nullable=False)
     correct_answer = db.Column(db.Text, nullable=False)
-    options = db.Column(db.ARRAY(db.Text))
+    options = db.Column(ARRAY(db.Text))  # Specifically using PostgreSQL ARRAY type
